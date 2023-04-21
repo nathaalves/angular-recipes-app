@@ -31,22 +31,4 @@ export class AppComponent {
     this.ingredientName = '';
     this.ingredientAmount = '';
   }
-
-  onRecipeCancel() {
-    this.isAddRecipeVisible = false;
-  }
-
-  onRecipeAdded() {
-    this.recipes.push({
-      name: this.recipeName,
-      description: this.recipeDescription,
-      image: this.recipeImage,
-      ingredients: this.ingredients,
-    });
-    this.recipeName = '';
-    this.recipeDescription = '';
-    this.recipeImage = '';
-    this.ingredients = [];
-    this.isAddRecipeVisible = false;
-  }
 }
