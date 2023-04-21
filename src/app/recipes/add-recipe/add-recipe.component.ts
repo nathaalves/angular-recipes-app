@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Ingredient } from '../ingredient/ingredient.module';
+import { Ingredient } from '../ingredient/ingredient.model';
 import { Recipe } from '../recipes-list/recipe-item/recipe.model';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -8,8 +9,9 @@ import { Recipe } from '../recipes-list/recipe-item/recipe.model';
 })
 export class AddRecipeComponent {
   @Output() recipeCancel = new EventEmitter();
-  @Output() recipeAdded = new EventEmitter<Recipe>();
   ingredients: Ingredient[] = [];
+
+  constructor(private recipesService: RecipesService) {}
 
   onRecipeCancel() {
     this.recipeCancel.emit();
@@ -20,8 +22,9 @@ export class AddRecipeComponent {
   }
 
   onRecipeAdded({ name, description, image }: Recipe) {
-    this.recipeAdded.emit(
+    this.recipesService.addRecipe(
       new Recipe(name, description, image, this.ingredients)
     );
+    this.recipeCancel.emit();
   }
 }

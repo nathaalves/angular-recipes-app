@@ -6,11 +6,10 @@
     >
       New recipe
     </button>
-    <app-recipes-list [recipes]="recipes"></app-recipes-list>
+    <app-recipes-list></app-recipes-list>
   </section>
   <app-add-recipe
     *ngIf="isAddRecipeVisible"
-    (recipeAdded)="onRecipeAdded($event)"
     (recipeCancel)="onRecipeCancel()"
   ></app-add-recipe>
 </main>

@@ -34,7 +34,7 @@
     </div>
     <button
       class="h-12 p-4 mt-auto text-white font-bold rounded bg-green-600"
-      [disabled]="!ingredientName.value || !ingredientAmount.value"
+      [disabled]="false"
       (click)="
         onIngredientAdded({
           name: ingredientName.value,
