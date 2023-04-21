@@ -1,0 +1,16 @@
+<main class="flex flex-1 px-12 py-6 gap-4">
+  <section class="flex flex-col flex-1">
+    <button
+      class="w-36 h-12 text-white font-bold rounded bg-green-600"
+      (click)="onAddRecipe()"
+    >
+      New recipe
+    </button>
+    <app-recipes-list [recipes]="recipes"></app-recipes-list>
+  </section>
+  <app-add-recipe
+    *ngIf="isAddRecipeVisible"
+    (recipeAdded)="onRecipeAdded($event)"
+    (recipeCancel)="onRecipeCancel()"
+  ></app-add-recipe>
+</main>
