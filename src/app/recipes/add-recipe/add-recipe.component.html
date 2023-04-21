@@ -1,22 +1,18 @@
 <section class="flex flex-col flex-1">
   <h2 class="text-2xl font-bold my-4">Add new recipe</h2>
   <label for="recipe-name">Recipe name:</label>
-  <input
-    id="recipe-name"
-    class="w-full h-12 px-4 border rounded"
-    [(ngModel)]="recipe.name"
-  />
+  <input id="recipe-name" class="w-full h-12 px-4 border rounded" #recipeName />
   <label for="recipe-description" class="mt-2">Recipe description:</label>
   <input
     id="recipe-description"
     class="w-full h-12 px-4 border rounded"
-    [(ngModel)]="recipe.description"
+    #recipeDescription
   />
   <label for="recipe-image" class="mt-2">Recipe image:</label>
   <input
     id="recipe-image"
     class="w-full h-12 px-4 border rounded"
-    [(ngModel)]="recipe.image"
+    #recipeImage
   />
   <h3 class="text-xl font-bold my-4">Ingredients:</h3>
   <div class="flex gap-4">
@@ -25,7 +21,7 @@
       <input
         id="ingredient-name"
         class="h-12 px-4 border rounded"
-        [(ngModel)]="ingredient.name"
+        #ingredientName
       />
     </div>
     <div class="flex flex-col">
@@ -33,13 +29,18 @@
       <input
         id="ingredient-amount"
         class="w-24 h-12 px-4 border rounded"
-        [(ngModel)]="ingredient.amount"
+        #ingredientAmount
       />
     </div>
     <button
       class="h-12 p-4 mt-auto text-white font-bold rounded bg-green-600"
-      [disabled]="!ingredient.name || !ingredient.amount"
-      (click)="onIngredientAdded()"
+      [disabled]="!ingredientName.value || !ingredientAmount.value"
+      (click)="
+        onIngredientAdded({
+          name: ingredientName.value,
+          amount: ingredientAmount.value
+        })
+      "
     >
       Add
     </button>
@@ -65,12 +66,16 @@
     <button
       class="w-36 h-12 text-white font-bold rounded bg-green-600"
       [disabled]="
-        !recipe.name ||
-        !recipe.description ||
-        !recipe.image ||
-        !ingredients.length
+        !recipeName || !recipeDescription || !recipeImage || !ingredients.length
       "
-      (click)="onRecipeAdded()"
+      (click)="
+        onRecipeAdded({
+          name: recipeName.value,
+          description: recipeDescription.value,
+          image: recipeImage.value,
+          ingredients: ingredients
+        })
+      "
     >
       Add recipe
     </button>
